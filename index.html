@@ -5,231 +5,496 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CampusConnect | Student Hub</title>
+
   <style>
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Arial,sans-serif;background:#f5f6fc;color:#20243a}
-    button,input,select,textarea{font:inherit}
-    button{cursor:pointer;border:0;border-radius:9px;padding:11px 15px}
-    button:disabled{opacity:.5;cursor:not-allowed}
-    .primary{background:#6254e8;color:white}
-    .secondary{background:#ecebff;color:#4940bc}
-    .danger{background:#ffe8e8;color:#b42318}
-    input,select,textarea{width:100%;padding:12px;border:1px solid #dcddeb;border-radius:9px;background:white;margin:6px 0 13px}
-    label{font-size:13px;font-weight:bold}
-    h1,h2,h3{margin-top:0}
-    .hidden{display:none!important}
-    .auth-wrap{min-height:100vh;display:grid;place-items:center;padding:20px}
-    .auth-card{background:white;width:100%;max-width:440px;padding:32px;border-radius:20px;box-shadow:0 12px 45px #22224412}
-    .logo{font-size:25px;font-weight:800;color:#6254e8;margin-bottom:8px}
-    .muted{color:#777b91;font-size:14px;line-height:1.6}
-    .tabs{display:flex;gap:8px;margin:22px 0}
-    .tabs button{flex:1;background:#f0effb;color:#555}
-    .tabs button.active{background:#6254e8;color:white}
-    .full{width:100%}
-    #app{min-height:100vh}
-    header{background:white;border-bottom:1px solid #e9e9f2;padding:15px 25px;display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
-    .brand{font-size:21px;font-weight:800;color:#6254e8}
-    .nav{display:flex;gap:7px;flex-wrap:wrap}
-    .nav button{background:transparent;color:#62647a}
-    .nav button.active{background:#eeedff;color:#5044d1;font-weight:bold}
-    main{max-width:1200px;margin:auto;padding:28px 22px}
-    .welcome{margin-bottom:22px}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
-    .card{background:white;border:1px solid #e9e9f2;border-radius:15px;padding:20px;margin-bottom:16px}
-    .stat{font-size:30px;font-weight:800;color:#6254e8;margin:10px 0}
-    .section-title{margin:25px 0 15px}
-    .form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
-    .item{border:1px solid #e7e7f1;border-radius:12px;padding:16px;margin:12px 0;background:white}
-    .tag{display:inline-block;background:#efeeff;color:#5044d1;padding:5px 9px;border-radius:20px;font-size:12px;margin:3px}
-    .row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-    .message{margin:12px 0;font-size:14px;color:#5144cb;white-space:pre-wrap}
-    .error{color:#b42318}
-    .small{font-size:12px;color:#777b91}
-    .pill{display:inline-block;border-radius:20px;background:#e9f8ed;color:#21723a;padding:5px 9px;font-size:12px}
-    .empty{padding:20px;text-align:center;color:#777b91}
-    @media(max-width:600px){header{padding:14px}main{padding:20px 13px}.auth-card{padding:23px}.nav{width:100%}.nav button{padding:9px}}
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f6fc;
+      color: #20243a;
+    }
+
+    button, input, select, textarea { font: inherit; }
+
+    button {
+      cursor: pointer;
+      border: 0;
+      border-radius: 9px;
+      padding: 11px 15px;
+    }
+
+    button:disabled { opacity: .5; cursor: not-allowed; }
+    .primary { background: #6254e8; color: white; }
+    .secondary { background: #ecebff; color: #4940bc; }
+    .danger { background: #ffe8e8; color: #b42318; }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #dcddeb;
+      border-radius: 9px;
+      background: white;
+      margin: 6px 0 13px;
+    }
+
+    textarea { min-height: 85px; resize: vertical; }
+    label { font-size: 13px; font-weight: bold; }
+    h1, h2, h3 { margin-top: 0; }
+    .hidden { display: none !important; }
+    .full { width: 100%; }
+
+    .auth-wrap {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+    }
+
+    .auth-card {
+      background: white;
+      width: 100%;
+      max-width: 440px;
+      padding: 32px;
+      border-radius: 20px;
+      box-shadow: 0 12px 45px #22224412;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: 800;
+      color: #6254e8;
+      margin-bottom: 8px;
+    }
+
+    .muted { color: #777b91; font-size: 14px; line-height: 1.6; }
+
+    .tabs { display: flex; gap: 8px; margin: 22px 0; }
+    .tabs button { flex: 1; background: #f0effb; color: #555; }
+    .tabs button.active { background: #6254e8; color: white; }
+
+    #app { min-height: 100vh; }
+
+    header {
+      background: white;
+      border-bottom: 1px solid #e9e9f2;
+      padding: 15px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .brand { font-size: 21px; font-weight: 800; color: #6254e8; }
+    .nav { display: flex; gap: 7px; flex-wrap: wrap; }
+    .nav button { background: transparent; color: #62647a; }
+    .nav button.active { background: #eeedff; color: #5044d1; font-weight: bold; }
+
+    main { max-width: 1200px; margin: auto; padding: 28px 22px; }
+    .welcome { margin-bottom: 22px; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid #e9e9f2;
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+
+    .stat { font-size: 30px; font-weight: 800; color: #6254e8; margin: 10px 0; }
+    .section-title { margin: 25px 0 15px; }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+
+    .item {
+      border: 1px solid #e7e7f1;
+      border-radius: 12px;
+      padding: 16px;
+      margin: 12px 0;
+      background: white;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #efeeff;
+      color: #5044d1;
+      padding: 5px 9px;
+      border-radius: 20px;
+      font-size: 12px;
+      margin: 3px;
+    }
+
+    .row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .message {
+      margin: 12px 0;
+      font-size: 14px;
+      color: #5144cb;
+      white-space: pre-wrap;
+    }
+
+    .error { color: #b42318; }
+    .small { font-size: 12px; color: #777b91; }
+
+    .empty { padding: 20px; text-align: center; color: #777b91; }
+
+    .question-card {
+      border: 1px solid #e0def5;
+      background: #fbfaff;
+      border-radius: 12px;
+      padding: 16px;
+      margin: 16px 0;
+    }
+
+    .answer-label {
+      display: block;
+      padding: 9px;
+      margin: 7px 0;
+      border: 1px solid #e7e7f1;
+      border-radius: 8px;
+      background: white;
+      cursor: pointer;
+      font-weight: normal;
+    }
+
+    .answer-label input {
+      width: auto;
+      margin: 0 8px 0 0;
+    }
+
+    @media(max-width:600px) {
+      header { padding: 14px; }
+      main { padding: 20px 13px; }
+      .auth-card { padding: 23px; }
+      .nav { width: 100%; }
+      .nav button { padding: 9px; }
+    }
   </style>
 </head>
+
 <body>
 
-<section id="auth" class="auth-wrap">
-  <div class="auth-card">
-    <div class="logo">CampusConnect ✦</div>
-    <p class="muted">Your student hub for quizzes, projects and finding teammates.</p>
+  <!-- LOGIN AND REGISTRATION -->
+  <section id="auth" class="auth-wrap">
+    <div class="auth-card">
+      <div class="logo">CampusConnect ✦</div>
+      <p class="muted">
+        Your student hub for quizzes, projects and finding teammates.
+      </p>
 
-    <div class="tabs">
-      <button id="loginTab" class="active" type="button">Login</button>
-      <button id="registerTab" type="button">Create account</button>
-    </div>
-
-    <form id="authForm">
-      <div id="nameField" class="hidden">
-        <label for="name">Full name</label>
-        <input id="name" autocomplete="name" placeholder="Your name">
+      <div class="tabs">
+        <button id="loginTab" class="active" type="button">Login</button>
+        <button id="registerTab" type="button">Create account</button>
       </div>
 
-      <label for="email">Email address</label>
-      <input id="email" type="email" autocomplete="email" required placeholder="you@example.com">
-
-      <label for="password">Password</label>
-      <input id="password" type="password" autocomplete="current-password" minlength="6" required placeholder="At least 6 characters">
-
-      <div id="roleField" class="hidden">
-        <label for="role">Account type</label>
-        <select id="role">
-          <option value="student">Student</option>
-          <option value="teacher">Teacher</option>
-        </select>
-      </div>
-
-      <button id="authSubmit" class="primary full" type="submit">Login</button>
-      <p id="authMsg" class="message"></p>
-    </form>
-
-    <p class="small">Create an account with your email. If email confirmation is enabled in Supabase, follow the confirmation email before logging in.</p>
-  </div>
-</section>
-
-<section id="app" class="hidden">
-  <header>
-    <div class="brand">CampusConnect ✦</div>
-    <nav class="nav" aria-label="Main navigation">
-      <button data-page="dashboard" class="active">Dashboard</button>
-      <button data-page="quiz">Quizzes</button>
-      <button data-page="partners">Partner Finder</button>
-      <button data-page="projects">Projects</button>
-      <button data-page="profile">My Profile</button>
-    </nav>
-    <div class="row">
-      <span id="userLabel" class="small"></span>
-      <button id="logout" class="secondary" type="button">Log out</button>
-    </div>
-  </header>
-
-  <main>
-    <section id="dashboard" class="page">
-      <div class="welcome">
-        <h1 id="welcome">Welcome!</h1>
-        <p class="muted">Everything you need for your college projects in one place.</p>
-      </div>
-      <div class="grid">
-        <article class="card"><div class="muted">My quizzes</div><div id="statQuiz" class="stat">0</div><button class="secondary" data-page="quiz">Open quizzes</button></article>
-        <article class="card"><div class="muted">My projects</div><div id="statProject" class="stat">0</div><button class="secondary" data-page="projects">Explore projects</button></article>
-        <article class="card"><div class="muted">My profile</div><div class="stat">✦</div><button class="secondary" data-page="profile">Edit profile</button></article>
-      </div>
-      <div class="card">
-        <h2>Welcome to your student hub</h2>
-        <p class="muted">Create quizzes, discover project opportunities, and find students with skills that complement yours.</p>
-        <button class="primary" data-page="partners">Find project partners</button>
-      </div>
-    </section>
-
-    <section id="quiz" class="page hidden">
-      <h1>Quizzes</h1>
-      <p class="muted">Teachers can create quizzes. Students can join with a quiz code.</p>
-
-      <div id="teacherQuiz" class="card hidden">
-        <h2>Create a quiz</h2>
-        <form id="quizForm">
-          <label for="quizTitle">Quiz title</label>
-          <input id="quizTitle" required placeholder="e.g. Python Basics">
-          <label for="quizQuestion">Question</label>
-          <textarea id="quizQuestion" required placeholder="Enter your question"></textarea>
-          <div class="form-grid">
-            <div><label>Option 1</label><input id="opt0" required></div>
-            <div><label>Option 2</label><input id="opt1" required></div>
-            <div><label>Option 3</label><input id="opt2" required></div>
-            <div><label>Option 4</label><input id="opt3" required></div>
-          </div>
-          <label for="quizAnswer">Correct option</label>
-          <select id="quizAnswer">
-            <option value="0">Option 1</option>
-            <option value="1">Option 2</option>
-            <option value="2">Option 3</option>
-            <option value="3">Option 4</option>
-          </select>
-          <button class="primary" type="submit">Publish quiz</button>
-          <p id="quizMsg" class="message"></p>
-        </form>
-        <h2 class="section-title">My quizzes</h2>
-        <div id="myQuizzes"></div>
-      </div>
-
-      <div id="studentQuiz" class="card hidden">
-        <h2>Join a quiz</h2>
-        <form id="joinQuiz">
-          <label for="quizCode">Quiz code</label>
-          <input id="quizCode" required placeholder="Enter the code from your teacher">
-          <button class="primary" type="submit">Find quiz</button>
-        </form>
-        <div id="quizAttempt"></div>
-        <h2 class="section-title">My results</h2>
-        <div id="quizResults"></div>
-      </div>
-    </section>
-
-    <section id="partners" class="page hidden">
-      <h1>Project Partner Finder</h1>
-      <p class="muted">Discover students by skills, interests, course and year.</p>
-      <div class="card">
-        <div class="form-grid">
-          <div><label for="studentSearch">Search students</label><input id="studentSearch" placeholder="Name, skill or interest"></div>
-          <div><label for="skillFilter">Skill</label><select id="skillFilter"><option value="">All skills</option><option>Python</option><option>JavaScript</option><option>SQL</option><option>Data Science</option><option>Java</option><option>React</option><option>AI/ML</option></select></div>
-          <div><label for="yearFilter">Year</label><select id="yearFilter"><option value="">All years</option><option>1st Year</option><option>2nd Year</option><option>3rd Year</option><option>4th Year</option></select></div>
+      <form id="authForm">
+        <div id="nameField" class="hidden">
+          <label for="name">Full name</label>
+          <input id="name" autocomplete="name" placeholder="Your name">
         </div>
-      </div>
-      <div id="people"></div>
-    </section>
 
-    <section id="projects" class="page hidden">
+        <label for="email">Email address</label>
+        <input id="email" type="email" autocomplete="email"
+               required placeholder="you@example.com">
+
+        <label for="password">Password</label>
+        <input id="password" type="password" minlength="6"
+               autocomplete="current-password" required
+               placeholder="At least 6 characters">
+
+        <div id="roleField" class="hidden">
+          <label for="role">Account type</label>
+          <select id="role">
+            <option value="student">Student</option>
+            <option value="teacher">Teacher</option>
+          </select>
+        </div>
+
+        <button id="authSubmit" class="primary full" type="submit">
+          Login
+        </button>
+
+        <p id="authMsg" class="message"></p>
+      </form>
+
+      <p class="small">
+        Create an account with your email. If email confirmation is enabled
+        in Supabase, confirm your email before logging in.
+      </p>
+    </div>
+  </section>
+
+  <!-- MAIN APPLICATION -->
+  <section id="app" class="hidden">
+    <header>
+      <div class="brand">CampusConnect ✦</div>
+
+      <nav class="nav" aria-label="Main navigation">
+        <button data-page="dashboard" class="active">Dashboard</button>
+        <button data-page="quiz">Quizzes</button>
+        <button data-page="partners">Partner Finder</button>
+        <button data-page="projects">Projects</button>
+        <button data-page="profile">My Profile</button>
+      </nav>
+
       <div class="row">
-        <div><h1>Project Board</h1><p class="muted">Find teammates or share your project idea.</p></div>
-        <button id="newProject" class="primary">+ Create project</button>
+        <span id="userLabel" class="small"></span>
+        <button id="logout" class="secondary" type="button">Log out</button>
       </div>
-      <div id="projectModal" class="card hidden">
-        <h2>Post a project</h2>
-        <form id="projectForm">
-          <label for="projectTitle">Project title</label>
-          <input id="projectTitle" required placeholder="Project name">
-          <label for="projectDescription">Description</label>
-          <textarea id="projectDescription" required placeholder="What will your team build?"></textarea>
-          <label for="projectSkills">Skills needed (comma separated)</label>
-          <input id="projectSkills" placeholder="Python, SQL, UI/UX">
-          <button class="primary" type="submit">Publish project</button>
-          <button id="closeProject" class="secondary" type="button">Cancel</button>
-        </form>
-      </div>
-      <div class="card">
-        <label for="projectSearch">Search projects</label>
-        <input id="projectSearch" placeholder="Search by title, description or skill">
-      </div>
-      <div id="projectList"></div>
-    </section>
+    </header>
 
-    <section id="profile" class="page hidden">
-      <h1>My Profile</h1>
-      <p class="muted">Tell other students what you can contribute to a project.</p>
-      <div class="card">
-        <form id="profileForm">
+    <main>
+
+      <!-- DASHBOARD -->
+      <section id="dashboard" class="page">
+        <div class="welcome">
+          <h1 id="welcome">Welcome!</h1>
+          <p class="muted">
+            Everything you need for your college projects in one place.
+          </p>
+        </div>
+
+        <div class="grid">
+          <article class="card">
+            <div class="muted">My quizzes</div>
+            <div id="statQuiz" class="stat">0</div>
+            <button class="secondary" data-page="quiz">Open quizzes</button>
+          </article>
+
+          <article class="card">
+            <div class="muted">My projects</div>
+            <div id="statProject" class="stat">0</div>
+            <button class="secondary" data-page="projects">Explore projects</button>
+          </article>
+
+          <article class="card">
+            <div class="muted">My profile</div>
+            <div class="stat">✦</div>
+            <button class="secondary" data-page="profile">Edit profile</button>
+          </article>
+        </div>
+
+        <div class="card">
+          <h2>Welcome to your student hub</h2>
+          <p class="muted">
+            Create quizzes, discover project opportunities, and find
+            students with skills that complement yours.
+          </p>
+          <button class="primary" data-page="partners">Find project partners</button>
+        </div>
+      </section>
+
+      <!-- QUIZZES -->
+      <section id="quiz" class="page hidden">
+        <h1>Quizzes</h1>
+        <p class="muted">
+          Teachers can create quizzes with multiple questions.
+          Students can join with a quiz code.
+        </p>
+
+        <div id="teacherQuiz" class="card hidden">
+          <h2>Create a quiz</h2>
+
+          <form id="quizForm">
+            <label for="quizTitle">Quiz title</label>
+            <input id="quizTitle" required placeholder="e.g. Python Basics">
+
+            <div id="questionContainer"></div>
+
+            <button id="addQuestion" class="secondary" type="button">
+              + Add Question
+            </button>
+
+            <button class="primary" type="submit">Publish quiz</button>
+
+            <p id="quizMsg" class="message"></p>
+          </form>
+
+          <h2 class="section-title">My quizzes</h2>
+          <div id="myQuizzes"></div>
+        </div>
+
+        <div id="studentQuiz" class="card hidden">
+          <h2>Join a quiz</h2>
+
+          <form id="joinQuiz">
+            <label for="quizCode">Quiz code</label>
+            <input id="quizCode" required
+                   placeholder="Enter the code from your teacher">
+            <button class="primary" type="submit">Find quiz</button>
+          </form>
+
+          <div id="quizAttempt"></div>
+
+          <h2 class="section-title">My results</h2>
+          <div id="quizResults"></div>
+        </div>
+      </section>
+
+      <!-- PARTNER FINDER -->
+      <section id="partners" class="page hidden">
+        <h1>Project Partner Finder</h1>
+        <p class="muted">
+          Discover students by skills, interests, course and year.
+        </p>
+
+        <div class="card">
           <div class="form-grid">
-            <div><label for="pName">Full name</label><input id="pName" required></div>
-            <div><label for="branch">Branch / course</label><input id="branch" placeholder="CSE - Data Science"></div>
-            <div><label for="year">Year</label><select id="year"><option>1st Year</option><option>2nd Year</option><option>3rd Year</option><option>4th Year</option></select></div>
-            <div><label for="preferredRole">Preferred role</label><select id="preferredRole"><option>Developer</option><option>Frontend Developer</option><option>Backend Developer</option><option>Data Analyst</option><option>Designer</option><option>Researcher</option></select></div>
-          </div>
-          <label for="skills">Skills (comma separated)</label><input id="skills" placeholder="Python, SQL, HTML/CSS">
-          <label for="interests">Interests (comma separated)</label><input id="interests" placeholder="AI, web development">
-          <label for="bio">Short introduction</label><textarea id="bio" placeholder="Tell others about yourself"></textarea>
-          <button class="primary" type="submit">Save profile</button>
-          <p id="profileMsg" class="message"></p>
-        </form>
-      </div>
-    </section>
-  </main>
-</section>
+            <div>
+              <label for="studentSearch">Search students</label>
+              <input id="studentSearch" placeholder="Name, skill or interest">
+            </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="supabase.js"></script>
-<script src="script.js"></script>
+            <div>
+              <label for="skillFilter">Skill</label>
+              <select id="skillFilter">
+                <option value="">All skills</option>
+                <option>Python</option>
+                <option>JavaScript</option>
+                <option>SQL</option>
+                <option>Data Science</option>
+                <option>Java</option>
+                <option>React</option>
+                <option>AI/ML</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="yearFilter">Year</label>
+              <select id="yearFilter">
+                <option value="">All years</option>
+                <option>1st Year</option>
+                <option>2nd Year</option>
+                <option>3rd Year</option>
+                <option>4th Year</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div id="people"></div>
+      </section>
+
+      <!-- PROJECTS -->
+      <section id="projects" class="page hidden">
+        <div class="row">
+          <div>
+            <h1>Project Board</h1>
+            <p class="muted">Find teammates or share your project idea.</p>
+          </div>
+          <button id="newProject" class="primary" type="button">
+            + Create project
+          </button>
+        </div>
+
+        <div id="projectModal" class="card hidden">
+          <h2>Post a project</h2>
+
+          <form id="projectForm">
+            <label for="projectTitle">Project title</label>
+            <input id="projectTitle" required placeholder="Project name">
+
+            <label for="projectDescription">Description</label>
+            <textarea id="projectDescription" required
+                      placeholder="What will your team build?"></textarea>
+
+            <label for="projectSkills">Skills needed (comma separated)</label>
+            <input id="projectSkills" placeholder="Python, SQL, UI/UX">
+
+            <button class="primary" type="submit">Publish project</button>
+            <button id="closeProject" class="secondary" type="button">Cancel</button>
+          </form>
+        </div>
+
+        <div class="card">
+          <label for="projectSearch">Search projects</label>
+          <input id="projectSearch" placeholder="Search by title, description or skill">
+        </div>
+
+        <div id="projectList"></div>
+      </section>
+
+      <!-- PROFILE -->
+      <section id="profile" class="page hidden">
+        <h1>My Profile</h1>
+        <p class="muted">
+          Tell other students what you can contribute to a project.
+        </p>
+
+        <div class="card">
+          <form id="profileForm">
+            <div class="form-grid">
+              <div>
+                <label for="pName">Full name</label>
+                <input id="pName" required>
+              </div>
+
+              <div>
+                <label for="branch">Branch / course</label>
+                <input id="branch" placeholder="CSE - Data Science">
+              </div>
+
+              <div>
+                <label for="year">Year</label>
+                <select id="year">
+                  <option>1st Year</option>
+                  <option>2nd Year</option>
+                  <option>3rd Year</option>
+                  <option>4th Year</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="preferredRole">Preferred role</label>
+                <select id="preferredRole">
+                  <option>Developer</option>
+                  <option>Frontend Developer</option>
+                  <option>Backend Developer</option>
+                  <option>Data Analyst</option>
+                  <option>Designer</option>
+                  <option>Researcher</option>
+                </select>
+              </div>
+            </div>
+
+            <label for="skills">Skills (comma separated)</label>
+            <input id="skills" placeholder="Python, SQL, HTML/CSS">
+
+            <label for="interests">Interests (comma separated)</label>
+            <input id="interests" placeholder="AI, web development">
+
+            <label for="bio">Short introduction</label>
+            <textarea id="bio" placeholder="Tell others about yourself"></textarea>
+
+            <button class="primary" type="submit">Save profile</button>
+            <p id="profileMsg" class="message"></p>
+          </form>
+        </div>
+      </section>
+
+    </main>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
